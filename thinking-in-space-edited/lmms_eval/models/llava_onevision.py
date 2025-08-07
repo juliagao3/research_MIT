@@ -565,3 +565,40 @@ class Llava_OneVision(lmms):
 
         pbar.close()
         return res
+
+    def extract_hidden_states(self, images):
+      image_tokens = " ".join([DEFAULT_IMAGE_TOKEN] * len(images))
+
+      if DEFAULT_IMAGE_TOKEN not in self.tokenizer.get_vocab():
+          self.tokenizer.add_tokens([DEFAULT_IMAGE_TOKEN])
+          self.model.resize_token_embeddings(len(self.tokenizer))
+
+      IMAGE_TOKEN_INDEX = self.tokenizer.convert_tokens_to_ids(DEFAULT_IMAGE_TOKEN)
+
+
+      input_ids = tokenizer_image_token(
+          image_tokens, self.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt"
+      ).unsqueeze(0).to(self.device)
+
+      image_tensors = torch.stack([
+          self._image_processor.preprocess(img, return_tensors="pt")["pixel_values"].squeeze(0)
+          for img in images
+      ]).to(dtype=torch.float16, device=self.device)
+
+      image_sizes = [[img.width, img.height] for img in images]
+
+      with torch.inference_mode():
+          outputs = self.model(
+              input_ids=input_ids,
+              images=image_tensors,
+              image_sizes=image_sizes,
+              output_hidden_states=True,
+              use_cache=False
+          )
+
+      hidden = outputs.hidden_states[-1].squeeze(0) 
+
+      image_token_positions = (input_ids[0] == IMAGE_TOKEN_INDEX).nonzero(as_tuple=True)[0]
+      embeddings = hidden[image_token_positions]
+
+      return embeddings
