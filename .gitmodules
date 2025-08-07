@@ -1,0 +1,12 @@
+[submodule "thinking-in-space-edited/LLaVA-NeXT"]
+	path = thinking-in-space-edited/LLaVA-NeXT
+	url = https://github.com/LLaVA-VL/LLaVA-NeXT.git
+[submodule "thinking-in-space-edited/LongVA"]
+	path = thinking-in-space-edited/LongVA
+	url = https://github.com/EvolvingLMMs-Lab/LongVA.git
+[submodule "thinking-in-space-edited/VILA"]
+	path = thinking-in-space-edited/VILA
+	url = https://github.com/NVlabs/VILA.git
+[submodule "thinking-in-space-edited/transformers"]
+	path = thinking-in-space-edited/transformers
+	url = https://github.com/huggingface/transformers.git
