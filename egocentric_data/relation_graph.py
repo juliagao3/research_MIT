@@ -207,7 +207,7 @@ def make_node_labels(n):
 
 #     save_full_relation_graph(graph)
 def generate_dataset(out_root="relation_graph_dataset", easy_range=(15, 20), hard_range=(30, 36), 
-                     walks_per_graph=5, easy_step=(10, 15), hard_step=(25, 30), easy_stop=0.3, hard_stop=0.1):
+                     walks_per_graph=10, easy_step=(10, 15), hard_step=(25, 30), easy_stop=0.3, hard_stop=0.1):
     
     os.makedirs(out_root, exist_ok=True)
 
@@ -215,7 +215,7 @@ def generate_dataset(out_root="relation_graph_dataset", easy_range=(15, 20), har
     easy_root = os.path.join(out_root, "easy")
     os.makedirs(easy_root, exist_ok=True)
 
-    for j in range(20):
+    for j in range(10):
         n_nodes = random.randint(*easy_range)
         topics = make_node_labels(n_nodes)
         graph = RelationGraph(topics)
@@ -279,4 +279,4 @@ def generate_dataset(out_root="relation_graph_dataset", easy_range=(15, 20), har
 
 if __name__ == "__main__":
     generate_dataset(out_root="relation_graph_dataset", easy_range=(15, 20), hard_range=(30, 36), 
-                     walks_per_graph=5, easy_step=(10, 15), hard_step=(25, 30), easy_stop=0.3, hard_stop=0.1)
+                     walks_per_graph=10, easy_step=(10, 15), hard_step=(25, 30), easy_stop=0.3, hard_stop=0.1)
