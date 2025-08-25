@@ -215,7 +215,7 @@ def generate_dataset(out_root="relation_graph_dataset", easy_range=(15, 20), har
     easy_root = os.path.join(out_root, "easy")
     os.makedirs(easy_root, exist_ok=True)
 
-    for j in range(10):
+    for j in range(20):
         n_nodes = random.randint(*easy_range)
         topics = make_node_labels(n_nodes)
         graph = RelationGraph(topics)
@@ -244,38 +244,38 @@ def generate_dataset(out_root="relation_graph_dataset", easy_range=(15, 20), har
             )
             print(f"[EASY {j}] Walk {i}: {' → '.join(walk)}")
 
-    hard_root = os.path.join(out_root, "hard")
-    os.makedirs(hard_root, exist_ok=True)
+    # hard_root = os.path.join(out_root, "hard")
+    # os.makedirs(hard_root, exist_ok=True)
 
 
-    for j in range(10):
-        n_nodes = random.randint(*hard_range)
-        topics = make_node_labels(n_nodes)
-        graph = RelationGraph(topics)
-        graph.generate_random_edges()
+    # for j in range(10):
+    #     n_nodes = random.randint(*hard_range)
+    #     topics = make_node_labels(n_nodes)
+    #     graph = RelationGraph(topics)
+    #     graph.generate_random_edges()
 
-        print(f"[HARD {j}] Root node:", graph.get_root())
-        graph.egocentric_traversal(graph.get_root())
+    #     print(f"[HARD {j}] Root node:", graph.get_root())
+    #     graph.egocentric_traversal(graph.get_root())
 
-        graph_dir = os.path.join(hard_root, f"graph_{j}")
-        os.makedirs(graph_dir, exist_ok=True)
+    #     graph_dir = os.path.join(hard_root, f"graph_{j}")
+    #     os.makedirs(graph_dir, exist_ok=True)
 
-        save_full_relation_graph(
-            graph,
-            output_path=os.path.join(graph_dir, "full_relation_graph.png")
-        )
+    #     save_full_relation_graph(
+    #         graph,
+    #         output_path=os.path.join(graph_dir, "full_relation_graph.png")
+    #     )
 
-        for i in range(walks_per_graph):
-            min_steps = random.randint(*hard_step)
-            walk = full_exploratory_walk(
-                graph,
-                walk_idx=i,
-                output_dir=graph_dir,
-                stop_prob=hard_stop,
-                min_steps=min_steps,
-                max_steps=max(min_steps + 6, int(0.8 * n_nodes))  # cap by graph size
-            )
-            print(f"[HARD {j}] Walk {i}: {' → '.join(walk)}")
+    #     for i in range(walks_per_graph):
+    #         min_steps = random.randint(*hard_step)
+    #         walk = full_exploratory_walk(
+    #             graph,
+    #             walk_idx=i,
+    #             output_dir=graph_dir,
+    #             stop_prob=hard_stop,
+    #             min_steps=min_steps,
+    #             max_steps=max(min_steps + 6, int(0.8 * n_nodes))  # cap by graph size
+    #         )
+    #         print(f"[HARD {j}] Walk {i}: {' → '.join(walk)}")
 
 if __name__ == "__main__":
     generate_dataset(out_root="relation_graph_dataset", easy_range=(15, 20), hard_range=(30, 36), 

@@ -1,13 +1,5 @@
-L
+R
+B
 C
-K
-C
-H
-C
-L
-I
-M
-I
-E
-I
-L
+B
+R

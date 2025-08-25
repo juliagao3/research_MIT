@@ -1,11 +1,5 @@
-G
-A
-G
-I
-B
-D
-B
-I
-G
+H
+P
 L
-G
+P
+H
