@@ -1,5 +1,12 @@
-A
+B
+S
+B
+D
+B
+D
+B
+S
+B
 D
 N
-D
-A
+K
