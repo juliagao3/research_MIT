@@ -1,0 +1,30 @@
+A: H
+AA: P
+AB: F, N, U
+AC: C, Y
+AD: T
+B: G, T
+C: AC, L, Z
+D: H
+E: F, Q
+F: AB, E, H
+G: B, I, S
+H: A, D, F
+I: G
+J: P
+K: B, E, L
+L: C, P
+M: R
+N: AB
+O: W
+P: AA, J, L
+Q: E, R, W
+R: M, Q
+S: G
+T: AD, B, V
+U: AB
+V: T
+W: O, Q, X
+X: W
+Y: AC
+Z: C
